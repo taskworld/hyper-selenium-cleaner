@@ -66,3 +66,12 @@ hyper cron create \
 hyper run --rm -v hyper-selenium-cron:/data --size=s3 circleci/node \
   bash -c 'cd /data/src/hyper-selenium-cleaner && git pull'
 ```
+
+## View log
+
+```
+hyper run --rm -v hyper-selenium-cron:/data --size=s3 circleci/node \
+  cat /data/log/hyper-selenium-cleaner.log
+```
+
+Note: A volume can only be attached to a single container, so if the cronjob is running, this may fail.
