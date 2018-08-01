@@ -38,6 +38,10 @@ END
 # Check if it works!
 alias hyper='/data/bin/hyper --config=/data/config/hyper'
 hyper ps
+
+# Create log folder
+sudo mkdir -p /data/log
+sudo chown circleci:circleci /data/log
 ```
 
 ## Run once
@@ -53,7 +57,7 @@ hyper run --rm -v hyper-selenium-cron:/data --size=s3 circleci/node \
 hyper cron create \
   --minute='*/5' --hour='*' --name=hyper-selenium-cleaner \
   -v hyper-selenium-cron:/data --size=s3 circleci/node \
-  node /data/src/hyper-selenium-cleaner/clean.js
+  bash -c 'node /data/src/hyper-selenium-cleaner/clean.js >>/data/log/hyper-selenium-cleaner.log 2>&1'
 ```
 
 ## Update code
