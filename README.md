@@ -40,3 +40,25 @@ alias hyper='/data/bin/hyper --config=/data/config/hyper'
 hyper ps
 ```
 
+## Run once
+
+```
+hyper run --rm -v hyper-selenium-cron:/data --size=s3 circleci/node \
+  node /data/src/hyper-selenium-cleaner/clean.js
+```
+
+## Run as cron
+
+```
+hyper cron create \
+  --minute='*/5' --hour='*' --name=hyper-selenium-cleaner \
+  -v hyper-selenium-cron:/data --size=s3 circleci/node \
+  node /data/src/hyper-selenium-cleaner/clean.js
+```
+
+## Update code
+
+```
+hyper run --rm -v hyper-selenium-cron:/data --size=s3 circleci/node \
+  bash -c 'cd /data/src/hyper-selenium-cleaner && git pull'
+```

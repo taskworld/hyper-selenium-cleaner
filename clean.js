@@ -31,6 +31,8 @@ agentsRaw.replace(
   }
 )
 
+console.log(`Number of running agents: ${agents.length}`)
+
 for (const agent of agents) {
   const durationSeconds = ((Date.now() - agent.created) / 1000).toFixed(1)
   console.log(`* ${agent.containerId} ran for ${durationSeconds}s`)
