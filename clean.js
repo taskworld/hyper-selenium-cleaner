@@ -38,9 +38,9 @@ for (const agent of agents) {
 
 for (const agent of agents.filter(a => Date.now() - a.created >= 600e3)) {
   console.log(`* Killing ${agent.containerId} — it ran for too long`)
-  // spawnSync(HYPER, [...HYPER_OPTS, 'rm', '-f', agent.containerId], {
-  //   stdio: 'inherit',
-  //   shell: true,
-  //   timeout: 10000,
-  // })
+  spawnSync(HYPER, [...HYPER_OPTS, 'rm', '-f', agent.containerId], {
+    stdio: 'inherit',
+    shell: true,
+    timeout: 10000,
+  })
 }
